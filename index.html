@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Les parasites</title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div id="container">
+  <canvas id="parasites"></canvas>
+  <div id="overlay">
+    <p class="taille">Noise size:</p>
+    <button onclick="augSize()" type="button" id="aug">+</button>
+    <button onclick="dimSize()" type="button" id="dim">-</button>
+    <!--
+    <p>Taille de l'image :</p>
+    <form autocomplete="off">
+    <input type="number" min="1" max="2500" id="inputwidth" class="inputtext" placeholder="1->2500"></input>
+    <input type="number" min="1" max="2500" id="inputheight" class="inputtext" placeholder="1->2500"></input>
+    <input type="button" value="OK" onClick="changeRes()" class="inputbutton"><br>
+    <input type="button" value="RESET" onClick="resetSettings()" class="inputbutton">
+  </form>
+   -->
+   <br>
+   <br>
+    <p><a id="download" download="parasites.png" href="" onclick="download_img(this);">Save noise</a></p>
+    <p class="interface">(<b>SPACE</b> to hide UI)</p>
+  </div>
+</div>
+</body>
+<script type="text/javascript">
+
+let size = 10;
+let seed = '0123456789abcdef';
+let width = window.innerWidth;
+let height = window.innerHeight;
+
+/*
+function changeRes(){
+  if(document.getElementById("inputwidth").value != 0){
+    width = document.getElementById("inputwidth").value;
+  }else{
+    width = height;
+  }
+  if(height = document.getElementById("inputheight").value != 0){
+    height = document.getElementById("inputheight").value;
+  }else{
+    height = width;
+  }
+    if((window.innerWidth <= width)||(window.innerHeight <= height)){
+    document.body.style.overflow="auto";
+  }
+}
+*/
+
+function augSize() {
+  size +=5;
+}
+
+function dimSize() {
+  if (size >=10){
+  size -=5;
+  }
+}
+
+
+document.addEventListener("keypress", function(event){
+    var timeSpace = 0;
+    if (event.keyCode == 32){
+      if(document.getElementById('overlay').style.display === "none"){
+     document.getElementById('overlay').style.display="block";
+   }else{
+     document.getElementById('overlay').style.display="none";
+   }
+   }
+ });
+
+ function resetSettings(){
+   width = window.innerWidth;
+   height = window.innerHeight;
+   size = 10;
+   document.body.style.overflow="hidden";
+ }
+
+function pixels(canvas){
+var canvas = document.getElementById('parasites');
+  var ctx = canvas.getContext('2d');
+  var canw = width;
+  var canh = height;
+  var total = []; canvas.width = width; canvas.height = height;
+
+  function random() {
+    return 'X'.replace(/X/g, function() {
+      return seed.charAt(Math.floor(Math.random() * seed.length))
+    })
+  };
+  for (var x=0; x <= width; x += size) {
+    total.push(x)
+  };
+
+  total.forEach(function(value, index){
+    for (var i = 0; i <= height; i++) {
+      ctx.fillStyle = '#' + random().repeat(6);
+      ctx.fillRect(value, total[i], size, size);
+    }
+  });
+
+  download_img = function(el) {
+    var image = canvas.toDataURL("image/png");
+    el.href = image;
+  };
+
+
+  function removeOldCanvas(parent) {
+     while (parent.firstChild) {
+         parent.removeChild(parent.firstChild);
+     }
+   }
+   removeOldCanvas(canvas);
+   document.body.appendChild(canvas);
+  return ctx;
+
+};
+setInterval(pixels, 10);
+
+
+
+
+</script>
+</html>

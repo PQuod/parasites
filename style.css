@@ -1,0 +1,75 @@
+
+body{
+  margin:0;
+  overflow:hidden;
+}
+
+a{
+  text-decoration:none;
+  color:red;
+}
+
+#overlay{
+  position:absolute;
+  bottom:0;
+  right:0;
+  display:block;
+  text-align:center;
+  background-color: white;
+  color:black;
+  font-family: Arial;
+  font-size:16px;
+  font-weight:bold;
+  border:3px solid black;
+  margin:10px;
+  padding:10px;
+}
+
+.taille{
+  text-transform: uppercase;
+}
+
+button{
+  color:black;
+  font-family: Arial;
+  border:1px solid black;
+  background:white;
+  width:24px;
+  height:24px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.interface{
+  font-size:12px;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+.inputtext{
+  border:1px solid black;
+  width:80px;
+  color:gray;
+  margin-bottom:20px;
+}
+
+.inputbutton{
+  background-color: white;
+  color:black;
+  font-family: Arial;
+  font-size:16px;
+  font-weight:bold;
+  border:1px solid black;
+  cursor:pointer;
+}
+
+#download{
+  background-color: white;
+  color:black;
+  font-family: Arial;
+  font-size:16px;
+  font-weight:bold;
+  border:1px solid black;
+  padding:3px;
+  text-transform:uppercase;
+}
